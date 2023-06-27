@@ -1,9 +1,9 @@
 "use client";
 
-import { useContacts } from "@/lib/contacts";
+import { Contact, useContacts } from "@/lib/contacts";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross1Icon, Pencil1Icon } from "@radix-ui/react-icons";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Spinner } from "./spinner";
 
 export default function Page() {
@@ -23,7 +23,7 @@ export default function Page() {
               <p className="text-sm text-gray-500">{contact.email}</p>
             </div>
             <div>
-              <ContactForm contact={contact} />
+              <EditContactButton contact={contact} />
             </div>
           </div>
         ))}
@@ -32,20 +32,21 @@ export default function Page() {
   );
 }
 
-function ContactForm({ contact }) {
+function EditContactButton({ contact }: { contact: Contact }) {
   let [open, setOpen] = useState(false);
   let [isSaving, setIsSaving] = useState(false);
   let { updateContact } = useContacts();
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     setIsSaving(true);
 
-    const attrs = Object.fromEntries(new FormData(e.currentTarget));
+    const attrs = Object.fromEntries(new FormData(event.currentTarget));
 
     await updateContact(contact.id, attrs);
 
     setOpen(false);
+    setIsSaving(false);
   }
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>

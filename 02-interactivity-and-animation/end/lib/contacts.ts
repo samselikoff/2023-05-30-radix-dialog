@@ -135,7 +135,7 @@ export function useContacts() {
 
   async function updateContact(
     id: string,
-    attrs: { name: string; role: string; email: string }
+    attrs: { [k: string]: FormDataEntryValue }
   ) {
     let newContacts = contacts.map((c) => {
       if (+c.id === +id) {

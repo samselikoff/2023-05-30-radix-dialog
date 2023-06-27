@@ -1,6 +1,6 @@
 # Styling a Radix Dialog with Tailwind CSS
 
-Learn how to use Tailwind CSS to style a Radix UI Dropdown component to match the look and feel of our app!
+Learn how to use Tailwind CSS to style a Radix UI Dialog component to match the look and feel of our app!
 
 Watch on YouTube → [https://www.youtube.com/watch?v=KvZoBV_1yYE](https://www.youtube.com/watch?v=KvZoBV_1yYE)
 

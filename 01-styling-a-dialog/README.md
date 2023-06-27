@@ -6,8 +6,8 @@ Watch on YouTube → [https://www.youtube.com/watch?v=KvZoBV_1yYE](https://www.y
 
 ## Links
 
-- [View the starting code](./begin/pages)
-- [View the ending code](./end/pages)
+- [View the starting code](./begin/app/page.tsx)
+- [View the ending code](./end/app/page.tsx)
 
 ## Running the demo locally
 

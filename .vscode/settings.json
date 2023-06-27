@@ -1,7 +1,7 @@
 {
   "eslint.workingDirectories": [
-    "./01-styling-a-dropdown/begin",
-    "./01-styling-a-dropdown/end",
+    "./01-styling-a-dialog/begin",
+    "./01-styling-a-dialog/end",
     "./02-interactivity-and-animation/begin",
     "./02-interactivity-and-animation/end",
   ]

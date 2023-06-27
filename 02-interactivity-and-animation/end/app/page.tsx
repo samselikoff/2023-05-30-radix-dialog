@@ -49,48 +49,49 @@ function EditContactButton({ contact }: { contact: Contact }) {
     setIsSaving(false);
   }
   return (
-    <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger className="rounded p-2 hover:bg-gray-200">
-        <Pencil1Icon />
-      </Dialog.Trigger>
+    <>
+      <Dialog.Root open={open} onOpenChange={setOpen}>
+        <Dialog.Trigger className="rounded p-2 hover:bg-gray-200">
+          <Pencil1Icon />
+        </Dialog.Trigger>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 bg-black/50 data-[state=closed]:animate-[overlay-out_200ms_ease-in] data-[state=open]:animate-[overlay-in_300ms_ease-out]" />
+          <Dialog.Content className="fixed left-1/2 top-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-8 text-gray-900 shadow data-[state=closed]:animate-[content-out_200ms_ease-in] data-[state=open]:animate-[content-in_300ms_ease-out]">
+            <div className="flex items-center justify-between">
+              <Dialog.Title className="text-xl">Edit contact</Dialog.Title>
+              <Dialog.Close className="text-gray-400 hover:text-gray-500">
+                <Cross1Icon />
+              </Dialog.Close>
+            </div>
 
-      <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-black/50" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-8 text-gray-900 shadow">
-          <div className="flex items-center justify-between">
-            <Dialog.Title className="text-xl">Edit contact</Dialog.Title>
-            <Dialog.Close className="text-gray-400 hover:text-gray-500">
-              <Cross1Icon />
-            </Dialog.Close>
-          </div>
-
-          <form onSubmit={handleSubmit}>
-            <fieldset disabled={isSaving} className="group">
-              <div className="mt-8 group-disabled:opacity-50">
-                <ContactFields contact={contact} />
-              </div>
-              <div className="mt-8 space-x-6 text-right">
-                <Dialog.Close className="rounded px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-600">
-                  Cancel
-                </Dialog.Close>
-                <button className="relative rounded bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-600 active:bg-green-700 group-disabled:pointer-events-none">
-                  <span className="absolute inset-0 flex items-center justify-center">
-                    <Spinner
-                      className="h-4 animate-spin group-enabled:opacity-0"
-                      style={{
-                        animationTimingFunction: "steps(12, end)",
-                        animationDuration: "1s",
-                      }}
-                    />
-                  </span>
-                  <span className="group-disabled:opacity-0">Save</span>
-                </button>
-              </div>
-            </fieldset>
-          </form>
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
+            <form onSubmit={handleSubmit}>
+              <fieldset disabled={isSaving} className="group">
+                <div className="mt-8 group-disabled:opacity-50">
+                  <ContactFields contact={contact} />
+                </div>
+                <div className="mt-8 space-x-6 text-right">
+                  <Dialog.Close className="rounded px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-600">
+                    Cancel
+                  </Dialog.Close>
+                  <button className="relative rounded bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-600 active:bg-green-700 group-disabled:pointer-events-none">
+                    <span className="absolute inset-0 flex items-center justify-center">
+                      <Spinner
+                        className="h-4 animate-spin group-enabled:opacity-0"
+                        style={{
+                          animationTimingFunction: "steps(12, end)",
+                          animationDuration: "1s",
+                        }}
+                      />
+                    </span>
+                    <span className="group-disabled:opacity-0">Save</span>
+                  </button>
+                </div>
+              </fieldset>
+            </form>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
+    </>
   );
 }
 

@@ -24,38 +24,33 @@ function ContactCard({ contact }: { contact: Contact }) {
   let [open, setOpen] = useState(false);
 
   return (
-    <>
-      <div className="relative flex justify-between overflow-hidden rounded-lg bg-white px-4 py-4 text-gray-900 shadow">
-        <div>
-          <p>{contact.name}</p>
-          <p className="text-sm text-gray-500">{contact.role}</p>
-          <p className="text-sm text-gray-500">{contact.email}</p>
-        </div>
-        <div>
-          <Dialog.Root open={open} onOpenChange={setOpen}>
-            <Dialog.Trigger className="rounded p-2 hover:bg-gray-200">
-              <Pencil1Icon />
-            </Dialog.Trigger>
-            <Dialog.Portal>
-              <Dialog.Overlay className="fixed inset-0 bg-black/50 data-[state=closed]:animate-[overlay-out_200ms_ease-in] data-[state=open]:animate-[overlay-in_300ms_ease-out]" />
-              <Dialog.Content className="fixed left-1/2 top-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-8 text-gray-900 shadow data-[state=closed]:animate-[content-out_200ms_ease-in] data-[state=open]:animate-[content-in_300ms_ease-out]">
-                <div className="flex items-center justify-between">
-                  <Dialog.Title className="text-xl">Edit contact</Dialog.Title>
-                  <Dialog.Close className="text-gray-400 hover:text-gray-500">
-                    <Cross1Icon />
-                  </Dialog.Close>
-                </div>
-
-                <ContactForm
-                  contact={contact}
-                  afterSave={() => setOpen(false)}
-                />
-              </Dialog.Content>
-            </Dialog.Portal>
-          </Dialog.Root>
-        </div>
+    <div className="relative flex justify-between overflow-hidden rounded-lg bg-white px-4 py-4 text-gray-900 shadow">
+      <div>
+        <p>{contact.name}</p>
+        <p className="text-sm text-gray-500">{contact.role}</p>
+        <p className="text-sm text-gray-500">{contact.email}</p>
       </div>
-    </>
+      <div>
+        <Dialog.Root open={open} onOpenChange={setOpen}>
+          <Dialog.Trigger className="rounded p-2 hover:bg-gray-200">
+            <Pencil1Icon />
+          </Dialog.Trigger>
+          <Dialog.Portal>
+            <Dialog.Overlay className="fixed inset-0 bg-black/50 data-[state=closed]:animate-[overlay-out_200ms_ease-in] data-[state=open]:animate-[overlay-in_300ms_ease-out]" />
+            <Dialog.Content className="fixed left-1/2 top-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-8 text-gray-900 shadow data-[state=closed]:animate-[content-out_200ms_ease-in] data-[state=open]:animate-[content-in_300ms_ease-out]">
+              <div className="flex items-center justify-between">
+                <Dialog.Title className="text-xl">Edit contact</Dialog.Title>
+                <Dialog.Close className="text-gray-400 hover:text-gray-500">
+                  <Cross1Icon />
+                </Dialog.Close>
+              </div>
+
+              <ContactForm contact={contact} afterSave={() => setOpen(false)} />
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
+      </div>
+    </div>
   );
 }
 

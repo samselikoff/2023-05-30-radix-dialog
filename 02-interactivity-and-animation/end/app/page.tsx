@@ -36,12 +36,10 @@ function ContactCard({ contact }: { contact: Contact }) {
     setOpen(false);
     setIsSaving(false);
   }
+
   return (
     <>
-      <div
-        className="flex justify-between rounded-lg bg-white px-4 py-4 text-gray-900 shadow"
-        key={contact.id}
-      >
+      <div className="relative flex justify-between overflow-hidden rounded-lg bg-white px-4 py-4 text-gray-900 shadow">
         <div>
           <p>{contact.name}</p>
           <p className="text-sm text-gray-500">{contact.role}</p>

@@ -146,7 +146,9 @@ export function useContacts() {
         return c;
       }
     });
+
     await sleep(1000);
+
     setContacts(newContacts);
   }
 

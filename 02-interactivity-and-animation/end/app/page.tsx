@@ -22,20 +22,6 @@ export default function Page() {
 
 function ContactCard({ contact }: { contact: Contact }) {
   let [open, setOpen] = useState(false);
-  let [isSaving, setIsSaving] = useState(false);
-  let { updateContact } = useContacts();
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setIsSaving(true);
-
-    const attrs = Object.fromEntries(new FormData(event.currentTarget));
-
-    await updateContact(contact.id, attrs);
-
-    setOpen(false);
-    setIsSaving(false);
-  }
 
   return (
     <>
@@ -60,30 +46,10 @@ function ContactCard({ contact }: { contact: Contact }) {
                   </Dialog.Close>
                 </div>
 
-                <form onSubmit={handleSubmit}>
-                  <fieldset disabled={isSaving} className="group">
-                    <div className="mt-8 group-disabled:opacity-50">
-                      <ContactFields contact={contact} />
-                    </div>
-                    <div className="mt-8 space-x-6 text-right">
-                      <Dialog.Close className="rounded px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-600">
-                        Cancel
-                      </Dialog.Close>
-                      <button className="relative rounded bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-600 active:bg-green-700 group-disabled:pointer-events-none">
-                        <span className="absolute inset-0 flex items-center justify-center">
-                          <Spinner
-                            className="h-4 animate-spin group-enabled:opacity-0"
-                            style={{
-                              animationTimingFunction: "steps(12, end)",
-                              animationDuration: "1s",
-                            }}
-                          />
-                        </span>
-                        <span className="group-disabled:opacity-0">Save</span>
-                      </button>
-                    </div>
-                  </fieldset>
-                </form>
+                <ContactForm
+                  contact={contact}
+                  afterSave={() => setOpen(false)}
+                />
               </Dialog.Content>
             </Dialog.Portal>
           </Dialog.Root>
@@ -93,46 +59,85 @@ function ContactCard({ contact }: { contact: Contact }) {
   );
 }
 
-function ContactFields({
+function ContactForm({
   contact,
+  afterSave,
 }: {
   contact: { id: string; name: string; email: string; role: string };
+  afterSave: () => void;
 }) {
-  return (
-    <div className="space-y-6">
-      <div>
-        <label className="text-sm font-medium text-gray-900">Name</label>
-        <input
-          autoFocus
-          className="mt-2 block w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm sm:leading-6"
-          type="text"
-          defaultValue={contact.name}
-          name="name"
-        />
-      </div>
+  let [isSaving, setIsSaving] = useState(false);
+  let { updateContact } = useContacts();
 
-      <div>
-        <label className="text-sm font-medium leading-6 text-gray-900">
-          Role
-        </label>
-        <input
-          className="mt-2 block w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm sm:leading-6"
-          type="text"
-          defaultValue={contact.role}
-          name="role"
-        />
-      </div>
-      <div>
-        <label className="text-sm font-medium leading-6 text-gray-900">
-          Email address
-        </label>
-        <input
-          className="mt-2 block w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm sm:leading-6"
-          type="text"
-          defaultValue={contact.email}
-          name="email"
-        />
-      </div>
-    </div>
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setIsSaving(true);
+
+    const attrs = Object.fromEntries(new FormData(event.currentTarget));
+
+    await updateContact(contact.id, attrs);
+
+    afterSave();
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <fieldset disabled={isSaving} className="group">
+        <div className="mt-8 group-disabled:opacity-50">
+          <div className="space-y-6">
+            <div>
+              <label className="text-sm font-medium text-gray-900">Name</label>
+              <input
+                autoFocus
+                className="mt-2 block w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm sm:leading-6"
+                type="text"
+                defaultValue={contact.name}
+                name="name"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium leading-6 text-gray-900">
+                Role
+              </label>
+              <input
+                className="mt-2 block w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm sm:leading-6"
+                type="text"
+                defaultValue={contact.role}
+                name="role"
+              />
+            </div>
+            <div>
+              <label className="text-sm font-medium leading-6 text-gray-900">
+                Email address
+              </label>
+              <input
+                className="mt-2 block w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm sm:leading-6"
+                type="text"
+                defaultValue={contact.email}
+                name="email"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="mt-8 space-x-6 text-right">
+          <Dialog.Close className="rounded px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-600">
+            Cancel
+          </Dialog.Close>
+          <button className="relative rounded bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-600 active:bg-green-700 group-disabled:pointer-events-none">
+            <span className="absolute inset-0 flex items-center justify-center">
+              <Spinner
+                className="h-4 animate-spin group-enabled:opacity-0"
+                style={{
+                  animationTimingFunction: "steps(12, end)",
+                  animationDuration: "1s",
+                }}
+              />
+            </span>
+            <span className="group-disabled:opacity-0">Save</span>
+          </button>
+        </div>
+      </fieldset>
+    </form>
   );
 }

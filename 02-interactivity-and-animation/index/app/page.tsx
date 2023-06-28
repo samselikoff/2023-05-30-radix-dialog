@@ -1,22 +1,24 @@
 "use client";
 
+import { useContacts } from "@/lib/contacts";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross1Icon, Pencil1Icon } from "@radix-ui/react-icons";
-import users from "./users.json";
 
 export default function Page() {
+  let { contacts } = useContacts();
+
   return (
     <div className="py-10">
       <div className="mx-auto max-w-sm space-y-4 rounded-lg bg-gray-200 p-4">
-        {users.map((user) => (
+        {contacts.map((contact) => (
           <div
             className="flex justify-between rounded-lg bg-white px-4 py-4 text-gray-900 shadow"
-            key={user.id}
+            key={contact.id}
           >
             <div>
-              <p>{user.name}</p>
-              <p className="text-sm text-gray-500">{user.role}</p>
-              <p className="text-sm text-gray-500">{user.email}</p>
+              <p>{contact.name}</p>
+              <p className="text-sm text-gray-500">{contact.role}</p>
+              <p className="text-sm text-gray-500">{contact.email}</p>
             </div>
             <div>
               <Dialog.Root>
@@ -37,7 +39,7 @@ export default function Page() {
                     </div>
 
                     <div className="mt-8">
-                      <UserFields user={user} />
+                      <UserFields user={contact} />
                     </div>
 
                     <div className="mt-8 space-x-6 text-right">

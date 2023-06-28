@@ -1,11 +1,11 @@
-export function Spinner(props: any) {
+export function Spinner({ className, ...rest }: any) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 27 27"
-      {...props}
+      {...rest}
+      className={`${className} animate-spin`}
       style={{
-        animation: "spin 1s linear infinite",
         animationTimingFunction: "steps(12, end)",
       }}
     >

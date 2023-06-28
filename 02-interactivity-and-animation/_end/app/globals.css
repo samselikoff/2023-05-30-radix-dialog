@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes overlay-in {
+@keyframes dialog-overlay-show {
   from {
     opacity: 0;
   }
@@ -11,7 +11,7 @@
   }
 }
 
-@keyframes overlay-out {
+@keyframes dialog-overlay-hide {
   from {
     opacity: 1;
   }
@@ -20,7 +20,7 @@
   }
 }
 
-@keyframes content-in {
+@keyframes dialog-content-show {
   from {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.95);
@@ -31,7 +31,7 @@
   }
 }
 
-@keyframes content-out {
+@keyframes dialog-content-hide {
   from {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);

@@ -13,7 +13,7 @@ export default function Page() {
     <div className="py-10">
       <div className="mx-auto max-w-sm space-y-4 rounded-lg bg-gray-200 p-4">
         {contacts.map((contact) => (
-          <ContactCard contact={contact} key={contact.id} />
+          <ContactCard key={contact.id} contact={contact} />
         ))}
       </div>
     </div>
@@ -24,7 +24,10 @@ function ContactCard({ contact }: { contact: Contact }) {
   let [open, setOpen] = useState(false);
 
   return (
-    <div className="relative flex justify-between overflow-hidden rounded-lg bg-white px-4 py-4 text-gray-900 shadow">
+    <div
+      className="flex justify-between rounded-lg bg-white px-4 py-4 text-gray-900 shadow"
+      key={contact.id}
+    >
       <div>
         <p>{contact.name}</p>
         <p className="text-sm text-gray-500">{contact.role}</p>
@@ -35,6 +38,7 @@ function ContactCard({ contact }: { contact: Contact }) {
           <Dialog.Trigger className="rounded p-2 hover:bg-gray-200">
             <Pencil1Icon />
           </Dialog.Trigger>
+
           <Dialog.Portal>
             <Dialog.Overlay className="fixed inset-0 bg-black/50 data-[state=closed]:animate-[dialog-overlay-hide_200ms] data-[state=open]:animate-[dialog-overlay-show_200ms]" />
             <Dialog.Content className="fixed left-1/2 top-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-8 text-gray-900 shadow data-[state=closed]:animate-[dialog-content-hide_200ms] data-[state=open]:animate-[dialog-content-show_200ms]">
@@ -58,26 +62,25 @@ function ContactForm({
   contact,
   afterSave,
 }: {
-  contact: { id: string; name: string; email: string; role: string };
+  contact: Contact;
   afterSave: () => void;
 }) {
-  let [isSaving, setIsSaving] = useState(false);
+  let [saving, setSaving] = useState(false);
   let { updateContact } = useContacts();
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setIsSaving(true);
+    setSaving(true);
 
-    const attrs = Object.fromEntries(new FormData(event.currentTarget));
+    let data = Object.fromEntries(new FormData(event.currentTarget));
 
-    await updateContact(contact.id, attrs);
-
+    await updateContact(contact.id, data);
     afterSave();
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <fieldset disabled={isSaving} className="group">
+      <fieldset disabled={saving} className="group">
         <div className="mt-8 group-disabled:opacity-50">
           <div className="space-y-6">
             <div>
@@ -119,16 +122,8 @@ function ContactForm({
           <Dialog.Close className="rounded px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-600">
             Cancel
           </Dialog.Close>
-          <button className="relative rounded bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-600 active:bg-green-700 group-disabled:pointer-events-none">
-            <span className="absolute inset-0 flex items-center justify-center">
-              <Spinner
-                className="h-4 animate-spin group-enabled:opacity-0"
-                style={{
-                  animationTimingFunction: "steps(12, end)",
-                  animationDuration: "1s",
-                }}
-              />
-            </span>
+          <button className="inline-flex items-center justify-center rounded bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-600 group-disabled:pointer-events-none">
+            <Spinner className="absolute h-4 group-enabled:opacity-0" />
             <span className="group-disabled:opacity-0">Save</span>
           </button>
         </div>

@@ -14,7 +14,7 @@ Watch on YouTube → [https://www.youtube.com/watch?v=KvZoBV_1yYE](https://www.y
 From the root,
 
 ```sh
-cd 01-styling-a-dialog/_end
+cd 01-styling-a-dialog/end
 npm i
 npm run dev
 ```

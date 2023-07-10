@@ -1,6 +1,6 @@
 # Dismissing a Radix Dialog after a form submission
 
-Learn how to turn our Radix Dialog into a controlled component so that it can be dismissed after a form submission, and add mount/unmount animations with CSS.
+Learn how to turn our Radix Dialog into a controlled component so that it can be dismissed after a form submission, and use CSS to add mount and unmount animations.
 
 Watch on YouTube → [https://www.youtube.com/watch?v=KvZoBV_1yYE](https://www.youtube.com/watch?v=KvZoBV_1yYE)
 
@@ -14,7 +14,7 @@ Watch on YouTube → [https://www.youtube.com/watch?v=KvZoBV_1yYE](https://www.y
 From the root,
 
 ```sh
-cd 02-interactivity-and-animation/_end
+cd 02-interactivity-and-animation/end
 npm i
 npm run dev
 ```

@@ -14,7 +14,7 @@ Watch on YouTube → [https://www.youtube.com/watch?v=KvZoBV_1yYE](https://www.y
 From the root,
 
 ```sh
-cd 02-interactivity-and-animation/end
+cd 03-reusable-component/end
 npm i
 npm run dev
 ```

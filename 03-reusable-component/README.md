@@ -2,7 +2,7 @@
 
 Learn how to refactor a styled animated Radix Dialog into a reusable Modal component.
 
-Watch on YouTube → [https://www.youtube.com/watch?v=KvZoBV_1yYE](https://www.youtube.com/watch?v=KvZoBV_1yYE)
+Watch on YouTube → [https://www.youtube.com/watch?v=VM6YRrUsnUY](https://www.youtube.com/watch?v=VM6YRrUsnUY)
 
 ## Links
 

@@ -1,6 +1,6 @@
-# Dismissing a Radix Dialog after a form submission
+# Reusable Modals with Radix UI
 
-Learn how to turn our Radix Dialog into a controlled component so that it can be dismissed after a form submission, and use CSS to add mount and unmount animations.
+Learn how to refactor a styled animated Radix Dialog into a reusable Modal component.
 
 Watch on YouTube → [https://www.youtube.com/watch?v=KvZoBV_1yYE](https://www.youtube.com/watch?v=KvZoBV_1yYE)
 

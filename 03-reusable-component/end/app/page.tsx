@@ -3,15 +3,15 @@
 import { Contact, useContacts } from "@/lib/contacts";
 import { Pencil1Icon, QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import { FormEvent, useState } from "react";
-import Modal from "./modal";
 import { Spinner } from "./spinner";
+import Modal from "./modal";
 import Button from "./button";
 
 export default function Page() {
   let { contacts } = useContacts();
 
   return (
-    <>
+    <div>
       <header className="flex items-center justify-between bg-blue-950 p-4">
         <p className="font-medium">Trelllo</p>
 
@@ -40,7 +40,7 @@ export default function Page() {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -62,6 +62,7 @@ function ContactCard({ contact }: { contact: Contact }) {
           <Modal.Button className="rounded p-2 hover:bg-gray-200">
             <Pencil1Icon />
           </Modal.Button>
+
           <Modal.Content title="Edit contact">
             <ContactForm contact={contact} afterSave={() => setOpen(false)} />
           </Modal.Content>

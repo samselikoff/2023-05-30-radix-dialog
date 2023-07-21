@@ -19,8 +19,8 @@ export default function Modal({
 }
 
 function ModalContent({
-  children,
   title,
+  children,
 }: {
   title: string;
   children: ReactNode;
@@ -43,5 +43,5 @@ function ModalContent({
 }
 
 Modal.Button = Dialog.Trigger;
-Modal.Content = ModalContent;
 Modal.Close = Dialog.Close;
+Modal.Content = ModalContent;
